@@ -1,4 +1,4 @@
-CREATE DATABASE pracownicy;
+CREATE DATABASE pracownicy DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_polish_ci;
 USE pracownicy;
 
 -- 1. Tworzy tabelę pracownik(imie, nazwisko, wyplata, data urodzenia, stanowisko). W tabeli mogą być dodatkowe kolumny, które uznasz za niezbędne.
