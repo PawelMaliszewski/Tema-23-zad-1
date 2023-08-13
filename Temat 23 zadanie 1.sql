@@ -54,7 +54,7 @@ CREATE TABLE stanowisko (
 	stanowisko_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nazwa_stanowiska VARCHAR(50) NOT NULL,
     opis VARCHAR(200),
-    wypata DECIMAL(7,2) NOT NULL
+    wyplata DECIMAL(7,2) NOT NULL
 );
 
 -- 10. Tworzy tabelę adres (ulica+numer domu/mieszkania, kod pocztowy, miejscowość)
@@ -65,7 +65,7 @@ CREATE TABLE adres (
     numer_domu VARCHAR(10) NOT NULL,
     numer_mieszkania VARCHAR(10),
     kod_pocztowy VARCHAR(6) NOT NULL,
-    miesjcowosc VARCHAR(30) NOT NULL
+    miejscowosc VARCHAR(30) NOT NULL
 );
 
 -- 11. Tworzy tabelę pracownik (imię, nazwisko) + relacje do tabeli stanowisko i adres
@@ -81,7 +81,7 @@ CREATE TABLE pracownik (
 
 -- 12.Dodaje dane testowe (w taki sposób, aby powstały pomiędzy nimi sensowne powiązania)
 
-INSERT INTO adres (ulica, numer_domu, numer_mieszkania, kod_pocztowy, miesjcowosc)
+INSERT INTO adres (ulica, numer_domu, numer_mieszkania, kod_pocztowy, miejscowosc)
 	VALUES
     ('Chabrów', 10, 11, '55-555', 'Opole'),
     ('1go. Maja', 18, NULL, '65-888', 'Kraków'),
@@ -91,7 +91,7 @@ INSERT INTO adres (ulica, numer_domu, numer_mieszkania, kod_pocztowy, miesjcowos
     ('Wrocławska', '188b', 15, '66-952', 'Ozimek'),
     ('Ozimska', 202, NULL, '35-645', 'Jelenia Góra');
     
-INSERT INTO stanowisko (nazwa_stanowiska, opis, wypata)
+INSERT INTO stanowisko (nazwa_stanowiska, opis, wyplata)
 	VALUES
     ('kierownik projektów IT', NULL, 25000),
     ('analityk danych', NULL, 9000),
@@ -113,8 +113,8 @@ INSERT INTO pracownik (imie, nazwisko, adres_id, stanowisko_id)
 -- 13. Pobiera pełne informacje o pracowniku (imię, nazwisko, adres, stanowisko)
 
 SELECT p.imie, p.nazwisko,
-		a.ulica, a.numer_domu, a.numer_mieszkania, a.miesjcowosc, a.kod_pocztowy, 
-        s.nazwa_stanowiska, s.opis, s.wypata 
+		a.ulica, a.numer_domu, a.numer_mieszkania, a.miejscowosc, a.kod_pocztowy, 
+        s.nazwa_stanowiska, s.opis, s.wyplata 
 	FROM pracownik p 
     JOIN adres a 
 		ON p.adres_id = a.adres_id
@@ -123,7 +123,7 @@ SELECT p.imie, p.nazwisko,
         
 -- 14. Oblicza sumę wypłat dla wszystkich pracowników w firmie
 
-SELECT SUM(s.wypata) AS 'SUMA WYPŁAT' FROM pracownik p 
+SELECT SUM(s.wyplata) AS 'SUMA WYPŁAT' FROM pracownik p 
 	JOIN stanowisko s
 		ON p.stanowisko_id = s.stanowisko_id;
 
