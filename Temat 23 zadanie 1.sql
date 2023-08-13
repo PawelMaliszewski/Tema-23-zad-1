@@ -72,11 +72,13 @@ CREATE TABLE adres (
 
 CREATE TABLE pracownik (
 	id INT AUTO_INCREMENT NOT NULL,
-    stanowisko_id VARCHAR(4) NOT NULL,
-    adres_id VARCHAR(4) NOT NULL,
+    stanowisko_id INT NOT NULL,
+    adres_id INT NOT NULL,
     imie VARCHAR(30) NOT NULL,
     nazwisko VARCHAR(30) NOT NULL,
-    PRIMARY KEY (id, stanowisko_id, adres_id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (stanowisko_id) REFERENCES stanowisko (stanowisko_id),
+    FOREIGN KEY (adres_id) REFERENCES adres (adres_id)
 );
 
 -- 12.Dodaje dane testowe (w taki sposób, aby powstały pomiędzy nimi sensowne powiązania)
